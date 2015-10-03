@@ -396,6 +396,7 @@
     <Compile Include="Models\AccessLogModel.cs" />
     <Compile Include="Models\AccessPoint.cs" />
     <Compile Include="Models\AccessPointDepartmentModel.cs" />
+    <Compile Include="Models\AccessPointEditModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\DashboardViewModel.cs" />
     <Compile Include="Models\Department.cs" />
@@ -428,6 +429,7 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\AccessLog\Index.cshtml" />
     <Content Include="Views\AccessPointDepartment\Index.cshtml" />
+    <Content Include="Views\AccessPointDepartment\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

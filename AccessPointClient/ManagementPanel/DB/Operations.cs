@@ -82,15 +82,35 @@ namespace ManagementPanel.DB
             return new OperationResult<IEnumerable<accessPoint>> { Success = true, ReturnValue = accessPoints };
         }
 
+        public static OperationResult<accessPoint> GetAccessPoint(user user, int accessPointId)
+        {
+            if ((Roles)user.Role_Id != Roles.Admin && (Roles)user.Role_Id != Roles.Manager)
+                return new OperationResult<accessPoint> { ErrorCode = 9, Message = "Unauthorized" };
+
+            accessPoint aP = null;
+            if ((Roles)user.Role_Id == Roles.Manager)
+                aP = Entities.accessPoint
+                    .Where(x => x.department_accessPoint.Count(y => y.Department_Id == user.Department_Id) > 0)
+                    .SingleOrDefault(x => x.Id == accessPointId);
+            else if ((Roles)user.Role_Id == Roles.Admin)
+                aP = Entities.accessPoint.SingleOrDefault(x => x.Id == accessPointId);
+
+            return new OperationResult<accessPoint> { Success = true, ReturnValue = aP };
+        }
+
         public static OperationResult<accessPoint> EditAccessPoint(user user, AccessPoint accessPoint)
         {
             if ((Roles)user.Role_Id != Roles.Admin && (Roles)user.Role_Id != Roles.Manager)
                 return new OperationResult<accessPoint> { ErrorCode = 9, Message = "Unauthorized" };
 
-            if ((Roles)user.Role_Id == Roles.Manager && user.Department_Id != accessPoint.Department.Id)
-                return new OperationResult<accessPoint> { ErrorCode = 9, Message = "Unauthorized" };
+            //if ((Roles)user.Role_Id == Roles.Manager && user.Department_Id != accessPoint.Department.Id)
+            //    return new OperationResult<accessPoint> { ErrorCode = 9, Message = "Unauthorized" };
 
             var ap = Entities.accessPoint.SingleOrDefault(x => x.Id == accessPoint.Id);
+
+            if ((Roles)user.Role_Id == Roles.Manager && user.Department_Id != ap.department_accessPoint.FirstOrDefault().Department_Id)
+                return new OperationResult<accessPoint> { ErrorCode = 9, Message = "Unauthorized" };
+
             if (ap != null)
             {
                 ap.IPv4 = accessPoint.IPv4;
@@ -99,6 +119,7 @@ namespace ManagementPanel.DB
                 ap.Location = accessPoint.Location;
                 ap.Name = accessPoint.Name;
             }
+
             Entities.SaveChanges();
             return new OperationResult<accessPoint> { Success = true, ReturnValue = ap };
         }

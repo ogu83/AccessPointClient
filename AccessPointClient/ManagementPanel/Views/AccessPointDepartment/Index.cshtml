@@ -42,8 +42,7 @@ else
                         <td>@ap.IPv6</td>
                         <td>@ap.Location</td>
                         <td>@Html.CheckBox("Is On", ap.IsOn, new { id = "chk_" + ap.Id, onclick = "checkBoxChanged(this," + ap.Id + ");" })</td>
-                        <td>
-                            <button>Edit</button></td>
+                        <td>@Html.ActionLink("Edit", "Edit", "AccessPointDepartment", new { id = ap.Id }, new { data_role = "button" })</td>
                     </tr>
                 }
             </tbody>

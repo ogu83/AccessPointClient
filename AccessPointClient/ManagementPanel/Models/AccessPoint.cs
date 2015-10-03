@@ -6,18 +6,17 @@ namespace ManagementPanel.Models
     public class AccessPoint
     {
         public AccessPoint() { }
-        public AccessPoint(DB.accessPoint x)
+        public AccessPoint(DB.accessPoint accessPoint)
             : this()
         {
-            Id = x.Id;
-            Name = x.Name;
-            IPv4 = x.IPv4;
-            IPv6 = x.IPv6;
-            Location = x.Location;
-            IsOn = x.IsOn > 0;
-            if (x.department_accessPoint.FirstOrDefault() != null)
-                Department = new Department(x.department_accessPoint.FirstOrDefault().department);
-
+            Id = accessPoint.Id;
+            Name = accessPoint.Name;
+            IPv4 = accessPoint.IPv4;
+            IPv6 = accessPoint.IPv6;
+            Location = accessPoint.Location;
+            IsOn = accessPoint.IsOn > 0;
+            if (accessPoint.department_accessPoint.FirstOrDefault() != null)
+                Department = new Department(accessPoint.department_accessPoint.FirstOrDefault().department);
         }
         public int Id { get; set; }
         public string Name { get; set; }

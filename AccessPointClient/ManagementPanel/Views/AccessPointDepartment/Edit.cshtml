@@ -1,0 +1,34 @@
+﻿@model ManagementPanel.Models.AccessPointEditModel
+@{
+    ViewBag.Title = "Access Point Edit";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<h3>Welcome, @Model.NameSurname . You are logged as @Model.Role</h3>
+<div>
+    @Html.ActionLink("Back", "Index", "AccessPointDepartment", new { }, new { data_role = "button" })
+    @using (Html.BeginForm("Edit", "AccessPointDepartment", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <fieldset>
+            <legend></legend>
+            <label>Id</label>
+            @Html.EditorFor(model => model.AccessPoint.Id, new { disabled="disabled", @readonly = "readonly" })
+            <label>Name</label>
+            @Html.EditorFor(model => model.AccessPoint.Name)
+            <label>IPv4</label>
+            @Html.EditorFor(model => model.AccessPoint.IPv4)
+            <label>IPv6</label>
+            @Html.EditorFor(model => model.AccessPoint.IPv6)
+            <label>Location</label>
+            @Html.EditorFor(model => model.AccessPoint.Location)
+            <label>IsOn</label>
+            @Html.EditorFor(model => model.AccessPoint.IsOn)
+            <br />
+            <div>
+                <input type="submit" value="Save" />
+            </div>
+        </fieldset>
+    }
+</div>
