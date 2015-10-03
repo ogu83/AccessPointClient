@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ManagementPanel.DB;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +11,7 @@ namespace ManagementPanel.Controllers
     {
         // GET: /Home/
         public ActionResult Index()
-        {
+        {            
             return View();
         }
 
@@ -20,18 +21,13 @@ namespace ManagementPanel.Controllers
         {
             var username = collection["txtUserName"].ToString();
             var password = collection["txtPassword"].ToString();
-            var users = _entities.user.Where(x => x.Username == username && x.Password == password);
-            if (users != null)
-                if (users.Count() > 0)
-                {
-                    var user = users.First();
-                    if (user != null)
-                    {
-                        Session.Timeout = 24 * 60;
-                        Session.Add("User", user);
-                        return RedirectToAction("Index", "Dashboard");
-                    }
-                }
+            var result = Operations.CheckUserLogin(username, password);
+            if (result.Success)
+            {
+                Session.Timeout = 24 * 60;
+                Session.Add("User", result.ReturnValue);
+                return RedirectToAction("Index", "Dashboard");
+            }
             return View();
         }
     }

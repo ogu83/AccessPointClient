@@ -19,7 +19,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 		Access Control System Software Architecture.pptx = Access Control System Software Architecture.pptx
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{DA2BBCD8-BB8D-4C90-AFED-5D4D32CDF579}"
+EndProject
 Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -41,6 +47,10 @@ Global
 		{C5B6368D-176B-4B04-B5EA-18F2BEBD148A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5B6368D-176B-4B04-B5EA-18F2BEBD148A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5B6368D-176B-4B04-B5EA-18F2BEBD148A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA2BBCD8-BB8D-4C90-AFED-5D4D32CDF579}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA2BBCD8-BB8D-4C90-AFED-5D4D32CDF579}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA2BBCD8-BB8D-4C90-AFED-5D4D32CDF579}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA2BBCD8-BB8D-4C90-AFED-5D4D32CDF579}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,5 +60,6 @@ Global
 		{B7DC1942-B117-436B-BAD8-51BB38E31FBE} = {38E9C8F3-027A-4CDA-AAEC-2F4EA35494B5}
 		{AA4CC8EF-7117-4733-8C6A-F902A210E674} = {38E9C8F3-027A-4CDA-AAEC-2F4EA35494B5}
 		{C5B6368D-176B-4B04-B5EA-18F2BEBD148A} = {38E9C8F3-027A-4CDA-AAEC-2F4EA35494B5}
+		{DA2BBCD8-BB8D-4C90-AFED-5D4D32CDF579} = {38E9C8F3-027A-4CDA-AAEC-2F4EA35494B5}
 	EndGlobalSection
 EndGlobal

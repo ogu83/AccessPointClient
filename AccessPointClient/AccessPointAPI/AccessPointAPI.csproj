@@ -115,7 +115,6 @@
     <Compile Include="DB\department_accessPoint.cs">
       <DependentUpon>AccessControlManagement.tt</DependentUpon>
     </Compile>
-    <Compile Include="DB\OperationResult.cs" />
     <Compile Include="DB\Operations.cs" />
     <Compile Include="DB\role.cs">
       <DependentUpon>AccessControlManagement.tt</DependentUpon>
@@ -166,6 +165,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{da2bbcd8-bb8d-4c90-afed-5d4d32cdf579}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

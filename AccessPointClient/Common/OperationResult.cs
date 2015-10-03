@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AccessPointAPI.DB
+namespace Common
 {
     public class OperationResult<T> where T : class
     {

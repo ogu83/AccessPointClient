@@ -1,4 +1,6 @@
-﻿using ManagementPanel.Models;
+﻿using Common;
+using ManagementPanel.DB;
+using ManagementPanel.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,7 @@ namespace ManagementPanel.Controllers
     public class DashboardController : ControllerWithDB
     {
         public ActionResult Index()
-        {
+        {          
             var user = Session["User"] as DB.user;
             if (user == null)
                 return RedirectToAction("Index", "Home");
@@ -31,17 +33,12 @@ namespace ManagementPanel.Controllers
         {
             var username = collection["txtUserName"].ToString();
             var password = collection["txtPassword"].ToString();
-            var users = _entities.user.Where(x => x.Username == username && x.Password == password);
-            if (users != null)
-                if (users.Count() > 0)
-                {
-                    var user = users.First();
-                    if (user != null)
-                    {
-                        Session.Timeout = 24 * 60;
-                        Session.Add("User", user);
-                    }
-                }
+            var result = Operations.CheckUserLogin(username, password);
+            if (result.Success)
+            {
+                Session.Timeout = 24 * 60;
+                Session.Add("User", result.ReturnValue);
+            }
             return Index();
         }
 
