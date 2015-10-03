@@ -1,4 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using Common;
+using ManagementPanel.DB;
+using ManagementPanel.Models;
+using System.Web.Mvc;
 
 namespace ManagementPanel.Controllers
 {
@@ -13,6 +16,12 @@ namespace ManagementPanel.Controllers
                     __entities = new DB.accessControlManagementEntities();
                 return __entities;
             }
+        }
+
+        protected void arrangeBaseModel(BaseModel model, user user)
+        {
+            model.NameSurname = user.FullName;
+            model.RoleType = (Roles)user.Role_Id;
         }
     }
 }

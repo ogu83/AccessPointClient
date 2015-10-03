@@ -12,14 +12,14 @@ namespace ManagementPanel.Controllers
     public class DashboardController : ControllerWithDB
     {
         public ActionResult Index()
-        {          
+        {
             var user = Session["User"] as DB.user;
             if (user == null)
                 return RedirectToAction("Index", "Home");
 
             var model = new DashboardViewModel();
-            model.NameSurname = user.FullName;
-            model.RoleType = (Roles)user.Role_Id;
+            arrangeBaseModel(model, user);
+
             return View(model);
         }
 

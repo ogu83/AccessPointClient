@@ -16,10 +16,10 @@ else if (Model.RoleType == Common.Roles.Manager)
 {
     <button>Edit Your Department</button>
     <button>Edit User Groups</button>
-    <button>View Department Access Log</button>
+    @Html.ActionLink("View Department Access Log", "Index", "AccessLog", new { }, new { data_role = "button" })
 }
 else if (Model.RoleType == Common.Roles.Employee)
-{        
-    <button>View My Access Log</button>
+{
+    @Html.ActionLink("View My Access Log", "Index", "AccessLog", new { }, new { data_role = "button" })
 }
 @Html.ActionLink("Logout", "Logout", new { }, new { data_role = "button" })

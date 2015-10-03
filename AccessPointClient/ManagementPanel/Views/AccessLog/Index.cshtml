@@ -1,0 +1,49 @@
+﻿@model ManagementPanel.Models.AccessLogModel
+@{
+    ViewBag.Title = "Access Log";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<h3>Welcome, @Model.NameSurname . You are logged as @Model.Role</h3>
+@if (Model.ErrorCode > 0)
+{
+    <div>
+        <h4>Error</h4>
+        @Model.ErrorCode;
+        <br />
+        @Model.ErrorMessage;        
+    </div>
+}
+else
+{   
+    <div>
+        @Html.ActionLink("Back", "Index", "Dashboard", new { }, new { data_role = "button" })
+        <div>Count : @Model.LogCount</div>
+        <table data-role="table" id="table-column-toggle" data-mode="reflow" class="ui-responsive">
+            <thead>
+                <tr>
+                    <th data-priority="1">Time Stamp</th>
+                    <th data-priority="2">AccessPoint Name</th>
+                    <th data-priority="3">Action Name</th>
+                    <th data-priority="4">Role Name</th>
+                    <th data-priority="5">User FullName</th>
+                    <th data-priority="6">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var log in Model.Logs)
+                {
+                    <tr>
+                        <th>@log.TimeStamp</th>
+                        <th>@log.AccessPointName</th>
+                        <td>@log.ActionName</td>
+                        <td>@log.RoleName</td>
+                        <td>@log.UserFullName</td>
+                        <td>@log.Description</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @Html.ActionLink("Back", "Index", "Dashboard", new { }, new { data_role = "button" })
+    </div>
+}
