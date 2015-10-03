@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+@using (Html.BeginForm("Index", "Dashboard", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="text" name="txtUserName" id="txtUserName" placeholder="User Name" value="" />
+    <input type="password" name="txtPassword" id="txtPassword" placeholder="Password" value="" />        
+    <input type="submit" value="Login" />
+}

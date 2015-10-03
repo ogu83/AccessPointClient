@@ -1,0 +1,25 @@
+﻿@model ManagementPanel.Models.DashboardViewModel
+@{
+    ViewBag.Title = "Tahminler";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<h3>Welcome, @Model.NameSurname . You are logged as @Model.Role</h3>
+@if (Model.RoleType == ManagementPanel.Controllers.ControllerWithDB.Roles.Admin)
+{
+    <button>Sync LDAP</button>
+    <button>Edit Departments</button>
+    <button>Edit Managers</button>
+    @Html.ActionLink("View Company Access Log", "Index", "AccessLog", new { }, new { data_role = "button" })
+}
+else if (Model.RoleType == ManagementPanel.Controllers.ControllerWithDB.Roles.Manager)
+{
+    <button>Edit Your Department</button>
+    <button>Edit User Groups</button>
+    <button>View Department Access Log</button>
+}
+else if (Model.RoleType == ManagementPanel.Controllers.ControllerWithDB.Roles.Employee)
+{        
+    <button>View My Access Log</button>
+}
+@Html.ActionLink("Logout", "Logout", new { }, new { data_role = "button" })

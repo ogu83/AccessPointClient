@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccessPointClient", "AccessPointClient\AccessPointClient.csproj", "{1356FFA4-DAF5-40DA-A4DA-B4BA90033D78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagementPanel", "ManagementPanel\ManagementPanel.csproj", "{AA4CC8EF-7117-4733-8C6A-F902A210E674}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportingTool", "ReportingTool\ReportingTool.csproj", "{B7DC1942-B117-436B-BAD8-51BB38E31FBE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{38E9C8F3-027A-4CDA-AAEC-2F4EA35494B5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{5EA152B4-6799-4F51-AC79-B9D96FF97809}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccessPointAPI", "AccessPointAPI\AccessPointAPI.csproj", "{C5B6368D-176B-4B04-B5EA-18F2BEBD148A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{0E7ED66A-1AAF-446B-B28A-81DB592A4CB1}"
+	ProjectSection(SolutionItems) = preProject
+		Access Control System Software Architecture.docx = Access Control System Software Architecture.docx
+		Access Control System Software Architecture.pptx = Access Control System Software Architecture.pptx
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1356FFA4-DAF5-40DA-A4DA-B4BA90033D78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1356FFA4-DAF5-40DA-A4DA-B4BA90033D78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1356FFA4-DAF5-40DA-A4DA-B4BA90033D78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1356FFA4-DAF5-40DA-A4DA-B4BA90033D78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA4CC8EF-7117-4733-8C6A-F902A210E674}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA4CC8EF-7117-4733-8C6A-F902A210E674}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA4CC8EF-7117-4733-8C6A-F902A210E674}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA4CC8EF-7117-4733-8C6A-F902A210E674}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7DC1942-B117-436B-BAD8-51BB38E31FBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7DC1942-B117-436B-BAD8-51BB38E31FBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7DC1942-B117-436B-BAD8-51BB38E31FBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7DC1942-B117-436B-BAD8-51BB38E31FBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5B6368D-176B-4B04-B5EA-18F2BEBD148A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5B6368D-176B-4B04-B5EA-18F2BEBD148A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5B6368D-176B-4B04-B5EA-18F2BEBD148A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5B6368D-176B-4B04-B5EA-18F2BEBD148A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1356FFA4-DAF5-40DA-A4DA-B4BA90033D78} = {5EA152B4-6799-4F51-AC79-B9D96FF97809}
+		{B7DC1942-B117-436B-BAD8-51BB38E31FBE} = {38E9C8F3-027A-4CDA-AAEC-2F4EA35494B5}
+		{AA4CC8EF-7117-4733-8C6A-F902A210E674} = {38E9C8F3-027A-4CDA-AAEC-2F4EA35494B5}
+		{C5B6368D-176B-4B04-B5EA-18F2BEBD148A} = {38E9C8F3-027A-4CDA-AAEC-2F4EA35494B5}
+	EndGlobalSection
+EndGlobal
