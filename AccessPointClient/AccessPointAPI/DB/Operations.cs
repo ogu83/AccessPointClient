@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AccessPointAPI.DB
-{    
+{
     public class Operations
     {
         private static accessControlManagementEntities _entities;
@@ -31,6 +31,9 @@ namespace AccessPointAPI.DB
                 var accessPoint = Entities.accessPoint.SingleOrDefault(x => x.Id == accessPointId);
                 if (accessPoint == null)
                     throw new NullReferenceException("No such access point");
+
+                if (accessPoint.IsOn == 0)
+                    throw new UnauthorizedAccessException("Access point is turned off");
 
                 if (accessPoint.department_accessPoint.Count(x => x.Department_Id == user.Department_Id) > 0)
                 {

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Common
 {
     public class OperationResult<T> where T : class
@@ -12,5 +7,15 @@ namespace Common
         public int ErrorCode { get; set; }
         public string Message { get; set; }
         public T ReturnValue { get; set; }
+
+        public JsonResult ToJsonResult()
+        {
+            return new JsonResult
+            {
+                Success = Success,
+                ErrorCode = ErrorCode,
+                Message = Message
+            };
+        }
     }
 }
