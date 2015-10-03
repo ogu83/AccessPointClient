@@ -17,7 +17,7 @@
 else if (Model.RoleType == Common.Roles.Manager)
 {
     @Html.ActionLink("Edit AccessPoint-Department", "Index", "AccessPointDepartment", new { }, new { data_role = "button" })
-    <button>Edit User-Department</button>
+    @Html.ActionLink("Edit User-Department", "Index", "UserDepartment", new { }, new { data_role = "button" })
     <button>Edit User-Groups</button>
     @Html.ActionLink("View Department Access Log", "Index", "AccessLog", new { }, new { data_role = "button" })
 }
