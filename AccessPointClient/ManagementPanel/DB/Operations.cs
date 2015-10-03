@@ -68,6 +68,7 @@ namespace ManagementPanel.DB
             return new OperationResult<IEnumerable<accessLog>> { Success = true, ReturnValue = logs, Message = string.Format("{0} Log Recieved", logs.Count()) };
         }
 
+
         public static OperationResult<IEnumerable<accessPoint>> GetAccessPoints(user user)
         {
             if ((Roles)user.Role_Id != Roles.Admin && (Roles)user.Role_Id != Roles.Manager)
@@ -170,6 +171,48 @@ namespace ManagementPanel.DB
             Entities.SaveChanges();
 
             return new OperationResult<DB.accessPoint> { Success = true, ReturnValue = newDbAccessPoint };
+        }
+
+
+        public static OperationResult<IEnumerable<user>> GetUsersOfManager(user manager)
+        {
+            if ((Roles)manager.Role_Id != Roles.Admin && (Roles)manager.Role_Id != Roles.Manager)
+                return new OperationResult<IEnumerable<user>> { ErrorCode = 9, Message = "Unauthorized" };
+
+            IEnumerable<user> users = null;
+            if ((Roles)manager.Role_Id == Roles.Manager)
+                users = Entities.user.Where(x => x.Department_Id == manager.Department_Id || x.Department_Id == Constants.NADepartment);
+            else if ((Roles)manager.Role_Id == Roles.Admin)
+                users = Entities.user;
+
+            return new OperationResult<IEnumerable<user>> { Success = true, ReturnValue = users };
+        }
+
+        public static OperationResult<user> ChangeDepartmentForUser(user manager, int employeeId, bool inMyDepartment)
+        {
+            var employee = Entities.user.SingleOrDefault(x => x.Id == employeeId);
+            if (employee == null)
+                return new OperationResult<user> { ErrorCode = 81, Message = "No such employee" };
+
+            if ((Roles)manager.Role_Id != Roles.Admin && (Roles)manager.Role_Id != Roles.Manager)
+                return new OperationResult<user> { ErrorCode = 9, Message = "Unauthorized" };
+
+            if ((Roles)employee.Role_Id != Roles.Employee || !(manager.Department_Id == employee.Department_Id || (employee.Department_Id == Constants.NADepartment)))
+                return new OperationResult<user> { ErrorCode = 91, Message = "Unauthorized, a manager can edit his/her departments employees" };
+
+            if (inMyDepartment)
+                employee.Department_Id = manager.Department_Id;
+            else
+                employee.Department_Id = Constants.NADepartment;
+
+            Entities.SaveChanges();
+
+            return new OperationResult<user>
+            {
+                Success = true,
+                ReturnValue = employee,
+                Message = "Employee is " + (inMyDepartment ? "allowed" : "denied")
+            };
         }
     }
 }

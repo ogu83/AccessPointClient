@@ -1,5 +1,6 @@
 ﻿using ManagementPanel.DB;
 using ManagementPanel.Models;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -67,7 +68,7 @@ namespace ManagementPanel.Controllers
         [HttpPost]
         public ActionResult Add(string name, string ipv4, string ipv6, string location, bool isOn)
         {
-            return View();
+            throw new NotImplementedException();
         }
 
         [HttpPost]

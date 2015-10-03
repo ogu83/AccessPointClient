@@ -349,6 +349,7 @@
     <Compile Include="Controllers\ControllerWithDB.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserDepartmentController.cs" />
     <Compile Include="DB\accessControlManagement.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -400,6 +401,8 @@
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\DashboardViewModel.cs" />
     <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserDepartmentModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -430,6 +433,7 @@
     <Content Include="Views\AccessLog\Index.cshtml" />
     <Content Include="Views\AccessPointDepartment\Index.cshtml" />
     <Content Include="Views\AccessPointDepartment\Edit.cshtml" />
+    <Content Include="Views\UserDepartment\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -440,7 +444,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Departments\" />
-    <Folder Include="Views\UserDepartment\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

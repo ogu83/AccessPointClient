@@ -1,6 +1,6 @@
-﻿@model ManagementPanel.Models.AccessPointDepartmentModel
+﻿@model ManagementPanel.Models.UserDepartmentModel
 @{
-    ViewBag.Title = "Access Points";
+    ViewBag.Title = "Users";
     Layout = "~/Views/_LayoutPage1.cshtml";
 }
 
@@ -24,25 +24,30 @@ else
             <thead>
                 <tr>
                     <th data-priority="1">Id</th>
-                    <th data-priority="2">Name</th>
-                    <th data-priority="3">IPv4</th>
-                    <th data-priority="4">IPv6</th>
-                    <th data-priority="5">Location</th>
-                    <th data-priority="6">Turn On/Off</th>
-                    <th data-priority="6">Edit</th>
+                    <th data-priority="2">Username</th>
+                    <th data-priority="3">Role</th>
+                    <th data-priority="4">Email</th>
+                    <th data-priority="5">Full Name</th>
+                    <th data-priority="6">Phone</th>
+                    <th data-priority="7">Work Start</th>
+                    <th data-priority="8">Work End</th>
+                    <th data-priority="9">Department</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var ap in Model.AccessPoints)
+                @foreach (var u in Model.Users)
                 {
                     <tr>
-                        <th>@ap.Id</th>
-                        <th>@ap.Name</th>
-                        <td>@ap.IPv4</td>
-                        <td>@ap.IPv6</td>
-                        <td>@ap.Location</td>
-                        <td>@Html.CheckBox("Is On", ap.IsOn, new { id = "chk_" + ap.Id, onclick = "checkBoxChanged(this," + ap.Id + ");" })</td>
-                        <td>@Html.ActionLink("Edit", "Edit", "AccessPointDepartment", new { id = ap.Id }, new { data_role = "button" })</td>
+                        <th>@u.Id</th>
+                        <td>@u.Username</td>
+                        <td>@u.RoleName</td>
+                        <td>@u.Email</td>
+                        <td>@u.FullName</td>
+                        <td>@u.Phone</td>
+                        <td>@u.WorkStartTime</td>
+                        <td>@u.WorkEndTime</td>
+                        <td>@Html.CheckBox("Allow Access", u.IsInMyDepartment, new { id = "chk_" + u.Id, onclick = "checkBoxChanged(this," + u.Id + ");" })</td>
+                        @*<td>@Html.ActionLink("Edit", "Edit", "AccessPointDepartment", new { id = ap.Id }, new { data_role = "button" })</td>*@
                     </tr>
                 }
             </tbody>
@@ -53,10 +58,10 @@ else
 <script>
     function checkBoxChanged(sender, id) {
         $.ajax({
-            url: "/AccessPointDepartment/TurnOnOffAccessPoint",
+            url: "/UserDepartment/ChangeDepartmentForUser",
             cache: false,
             type: "POST",
-            data: { accessPointId: id, isOn: sender.checked },
+            data: { employeeId: id, inMyDepartment: sender.checked },
             success: function (data) {
                 if (!data.Success)
                     sender.checked = !sender.checked;
@@ -74,4 +79,3 @@ else
         });
     }
 </script>
-
