@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ff0a4b3c02554e658a8e84237a285801" Name="Diagram1">
+        <EntityTypeShape EntityType="accessControlManagementModel.accessLog" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="accessControlManagementModel.accessPoint" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="accessControlManagementModel.department" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="accessControlManagementModel.department_accessPoint" Width="1.5" PointX="8.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="accessControlManagementModel.role" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="accessControlManagementModel.role_accessPoint" Width="1.5" PointX="6" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="accessControlManagementModel.user" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="accessControlManagementModel.userGroup" Width="1.5" PointX="3" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="accessControlManagementModel.userGroup_accessPoint" Width="1.5" PointX="5.25" PointY="18.25" IsExpanded="true" />
+        <AssociationConnector Association="accessControlManagementModel.FK_accessLog_accessPoint" ManuallyRouted="false" />
+        <AssociationConnector Association="accessControlManagementModel.FK_accessLog_role" ManuallyRouted="false" />
+        <AssociationConnector Association="accessControlManagementModel.FK_accessLog_user" ManuallyRouted="false" />
+        <AssociationConnector Association="accessControlManagementModel.FK_department_accessPoint_accessPoint" ManuallyRouted="false" />
+        <AssociationConnector Association="accessControlManagementModel.FK_role_accessPoint_accessPoint" ManuallyRouted="false" />
+        <AssociationConnector Association="accessControlManagementModel.FK_userGroup_accessPoint_accessPoint" ManuallyRouted="false" />
+        <AssociationConnector Association="accessControlManagementModel.FK_department_accessPoint_department" ManuallyRouted="false" />
+        <AssociationConnector Association="accessControlManagementModel.FK_user_department" ManuallyRouted="false" />
+        <AssociationConnector Association="accessControlManagementModel.FK_role_accessPoint_role" ManuallyRouted="false" />
+        <AssociationConnector Association="accessControlManagementModel.FK_user_role" ManuallyRouted="false" />
+        <AssociationConnector Association="accessControlManagementModel.FK_userGroup_role" ManuallyRouted="false" />
+        <AssociationConnector Association="accessControlManagementModel.FK_user_userGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="accessControlManagementModel.FK_userGroup_accessPoint_userGroup" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

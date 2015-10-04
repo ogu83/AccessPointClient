@@ -32,8 +32,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,11 +52,81 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DB\accessControlManagement.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>accessControlManagement.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\accessControlManagement.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>accessControlManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\accessControlManagement.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>accessControlManagement.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DB\accessLog.cs">
+      <DependentUpon>accessControlManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\accessPoint.cs">
+      <DependentUpon>accessControlManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\department.cs">
+      <DependentUpon>accessControlManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\department_accessPoint.cs">
+      <DependentUpon>accessControlManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\role.cs">
+      <DependentUpon>accessControlManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\role_accessPoint.cs">
+      <DependentUpon>accessControlManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\user.cs">
+      <DependentUpon>accessControlManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\userGroup.cs">
+      <DependentUpon>accessControlManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\userGroup_accessPoint.cs">
+      <DependentUpon>accessControlManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\ExtMailHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="DB\accessControlManagement.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>accessControlManagement.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DB\accessControlManagement.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>accessControlManagement.edmx</DependentUpon>
+      <LastGenOutput>accessControlManagement.Context.cs</LastGenOutput>
+    </None>
+    <None Include="DB\accessControlManagement.edmx.diagram">
+      <DependentUpon>accessControlManagement.edmx</DependentUpon>
+    </None>
+    <None Include="DB\accessControlManagement.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>accessControlManagement.edmx</DependentUpon>
+      <LastGenOutput>accessControlManagement.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{da2bbcd8-bb8d-4c90-afed-5d4d32cdf579}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

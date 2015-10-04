@@ -13,12 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{5EA152
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccessPointAPI", "AccessPointAPI\AccessPointAPI.csproj", "{C5B6368D-176B-4B04-B5EA-18F2BEBD148A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{0E7ED66A-1AAF-446B-B28A-81DB592A4CB1}"
-	ProjectSection(SolutionItems) = preProject
-		Access Control System Software Architecture.docx = Access Control System Software Architecture.docx
-		Access Control System Software Architecture.pptx = Access Control System Software Architecture.pptx
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{DA2BBCD8-BB8D-4C90-AFED-5D4D32CDF579}"
 EndProject
 Global

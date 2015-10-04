@@ -8,6 +8,7 @@
 @if (Model.RoleType == Common.Roles.Admin)
 {
     <button>Sync LDAP</button>
+    @Html.ActionLink("Sync LDAP", "SyncLDAP", new { }, new { data_role = "button" })
     <button>Edit Departments</button>
     <button>Edit Managers</button>
     <button>Edit Users</button>

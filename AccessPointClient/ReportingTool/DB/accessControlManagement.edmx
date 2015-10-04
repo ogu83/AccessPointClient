@@ -1,0 +1,773 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="accessControlManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="accessLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Action_Id" Type="int" Nullable="false" />
+          <Property Name="Role_Id" Type="int" Nullable="false" />
+          <Property Name="User_Id" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Time" Type="datetime" Nullable="false" />
+          <Property Name="AccessPoint_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="accessPoint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IPv4" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IPv6" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Location" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsOn" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="department_accessPoint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccessPoint_Id" Type="int" Nullable="false" />
+          <Property Name="Department_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsManager" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="role_accessPoint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role_Id" Type="int" Nullable="false" />
+          <Property Name="AccessPoint_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role_Id" Type="int" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Group_Id" Type="int" Nullable="false" />
+          <Property Name="Phone" Type="bigint" Nullable="false" />
+          <Property Name="WorkStartTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="WorkEndTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Department_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="userGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Role_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="userGroup_accessPoint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccessPoint_Id" Type="int" Nullable="false" />
+          <Property Name="Group_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_accessLog_accessPoint">
+          <End Role="accessPoint" Type="Self.accessPoint" Multiplicity="1" />
+          <End Role="accessLog" Type="Self.accessLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accessPoint">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="accessLog">
+              <PropertyRef Name="AccessPoint_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_accessLog_role">
+          <End Role="role" Type="Self.role" Multiplicity="1" />
+          <End Role="accessLog" Type="Self.accessLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="accessLog">
+              <PropertyRef Name="Role_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_accessLog_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="accessLog" Type="Self.accessLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="accessLog">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_department_accessPoint_accessPoint">
+          <End Role="accessPoint" Type="Self.accessPoint" Multiplicity="1" />
+          <End Role="department_accessPoint" Type="Self.department_accessPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accessPoint">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="department_accessPoint">
+              <PropertyRef Name="AccessPoint_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_department_accessPoint_department">
+          <End Role="department" Type="Self.department" Multiplicity="1" />
+          <End Role="department_accessPoint" Type="Self.department_accessPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="department_accessPoint">
+              <PropertyRef Name="Department_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_role_accessPoint_accessPoint">
+          <End Role="accessPoint" Type="Self.accessPoint" Multiplicity="1" />
+          <End Role="role_accessPoint" Type="Self.role_accessPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accessPoint">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="role_accessPoint">
+              <PropertyRef Name="AccessPoint_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_role_accessPoint_role">
+          <End Role="role" Type="Self.role" Multiplicity="1" />
+          <End Role="role_accessPoint" Type="Self.role_accessPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="role_accessPoint">
+              <PropertyRef Name="Role_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_department">
+          <End Role="department" Type="Self.department" Multiplicity="1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="Department_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_role">
+          <End Role="role" Type="Self.role" Multiplicity="1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="Role_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_userGroup">
+          <End Role="userGroup" Type="Self.userGroup" Multiplicity="1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="Group_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_userGroup_accessPoint_accessPoint">
+          <End Role="accessPoint" Type="Self.accessPoint" Multiplicity="1" />
+          <End Role="userGroup_accessPoint" Type="Self.userGroup_accessPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accessPoint">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="userGroup_accessPoint">
+              <PropertyRef Name="AccessPoint_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_userGroup_accessPoint_userGroup">
+          <End Role="userGroup" Type="Self.userGroup" Multiplicity="1" />
+          <End Role="userGroup_accessPoint" Type="Self.userGroup_accessPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="userGroup_accessPoint">
+              <PropertyRef Name="Group_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_userGroup_role">
+          <End Role="role" Type="Self.role" Multiplicity="1" />
+          <End Role="userGroup" Type="Self.userGroup" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="userGroup">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="accessControlManagementModelStoreContainer">
+          <EntitySet Name="accessLog" EntityType="Self.accessLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="accessPoint" EntityType="Self.accessPoint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="department" EntityType="Self.department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="department_accessPoint" EntityType="Self.department_accessPoint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="role_accessPoint" EntityType="Self.role_accessPoint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="userGroup" EntityType="Self.userGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="userGroup_accessPoint" EntityType="Self.userGroup_accessPoint" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_accessLog_accessPoint" Association="Self.FK_accessLog_accessPoint">
+            <End Role="accessPoint" EntitySet="accessPoint" />
+            <End Role="accessLog" EntitySet="accessLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_accessLog_role" Association="Self.FK_accessLog_role">
+            <End Role="role" EntitySet="role" />
+            <End Role="accessLog" EntitySet="accessLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_accessLog_user" Association="Self.FK_accessLog_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="accessLog" EntitySet="accessLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_department_accessPoint_accessPoint" Association="Self.FK_department_accessPoint_accessPoint">
+            <End Role="accessPoint" EntitySet="accessPoint" />
+            <End Role="department_accessPoint" EntitySet="department_accessPoint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_department_accessPoint_department" Association="Self.FK_department_accessPoint_department">
+            <End Role="department" EntitySet="department" />
+            <End Role="department_accessPoint" EntitySet="department_accessPoint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_role_accessPoint_accessPoint" Association="Self.FK_role_accessPoint_accessPoint">
+            <End Role="accessPoint" EntitySet="accessPoint" />
+            <End Role="role_accessPoint" EntitySet="role_accessPoint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_role_accessPoint_role" Association="Self.FK_role_accessPoint_role">
+            <End Role="role" EntitySet="role" />
+            <End Role="role_accessPoint" EntitySet="role_accessPoint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_department" Association="Self.FK_user_department">
+            <End Role="department" EntitySet="department" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_role" Association="Self.FK_user_role">
+            <End Role="role" EntitySet="role" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_userGroup" Association="Self.FK_user_userGroup">
+            <End Role="userGroup" EntitySet="userGroup" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
+          <AssociationSet Name="FK_userGroup_accessPoint_accessPoint" Association="Self.FK_userGroup_accessPoint_accessPoint">
+            <End Role="accessPoint" EntitySet="accessPoint" />
+            <End Role="userGroup_accessPoint" EntitySet="userGroup_accessPoint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_userGroup_accessPoint_userGroup" Association="Self.FK_userGroup_accessPoint_userGroup">
+            <End Role="userGroup" EntitySet="userGroup" />
+            <End Role="userGroup_accessPoint" EntitySet="userGroup_accessPoint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_userGroup_role" Association="Self.FK_userGroup_role">
+            <End Role="role" EntitySet="role" />
+            <End Role="userGroup" EntitySet="userGroup" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="accessControlManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="accessLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Action_Id" Type="Int32" Nullable="false" />
+          <Property Name="Role_Id" Type="Int32" Nullable="false" />
+          <Property Name="User_Id" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AccessPoint_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="accessPoint" Relationship="Self.FK_accessLog_accessPoint" FromRole="accessLog" ToRole="accessPoint" />
+          <NavigationProperty Name="role" Relationship="Self.FK_accessLog_role" FromRole="accessLog" ToRole="role" />
+          <NavigationProperty Name="user" Relationship="Self.FK_accessLog_user" FromRole="accessLog" ToRole="user" />
+        </EntityType>
+        <EntityType Name="accessPoint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IPv4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IPv6" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsOn" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="accessLog" Relationship="Self.FK_accessLog_accessPoint" FromRole="accessPoint" ToRole="accessLog" />
+          <NavigationProperty Name="department_accessPoint" Relationship="Self.FK_department_accessPoint_accessPoint" FromRole="accessPoint" ToRole="department_accessPoint" />
+          <NavigationProperty Name="role_accessPoint" Relationship="Self.FK_role_accessPoint_accessPoint" FromRole="accessPoint" ToRole="role_accessPoint" />
+          <NavigationProperty Name="userGroup_accessPoint" Relationship="Self.FK_userGroup_accessPoint_accessPoint" FromRole="accessPoint" ToRole="userGroup_accessPoint" />
+        </EntityType>
+        <EntityType Name="department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="department_accessPoint" Relationship="Self.FK_department_accessPoint_department" FromRole="department" ToRole="department_accessPoint" />
+          <NavigationProperty Name="user" Relationship="Self.FK_user_department" FromRole="department" ToRole="user" />
+        </EntityType>
+        <EntityType Name="department_accessPoint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccessPoint_Id" Type="Int32" Nullable="false" />
+          <Property Name="Department_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="accessPoint" Relationship="Self.FK_department_accessPoint_accessPoint" FromRole="department_accessPoint" ToRole="accessPoint" />
+          <NavigationProperty Name="department" Relationship="Self.FK_department_accessPoint_department" FromRole="department_accessPoint" ToRole="department" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsManager" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="accessLog" Relationship="Self.FK_accessLog_role" FromRole="role" ToRole="accessLog" />
+          <NavigationProperty Name="role_accessPoint" Relationship="Self.FK_role_accessPoint_role" FromRole="role" ToRole="role_accessPoint" />
+          <NavigationProperty Name="user" Relationship="Self.FK_user_role" FromRole="role" ToRole="user" />
+          <NavigationProperty Name="userGroup" Relationship="Self.FK_userGroup_role" FromRole="role" ToRole="userGroup" />
+        </EntityType>
+        <EntityType Name="role_accessPoint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role_Id" Type="Int32" Nullable="false" />
+          <Property Name="AccessPoint_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="accessPoint" Relationship="Self.FK_role_accessPoint_accessPoint" FromRole="role_accessPoint" ToRole="accessPoint" />
+          <NavigationProperty Name="role" Relationship="Self.FK_role_accessPoint_role" FromRole="role_accessPoint" ToRole="role" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Role_Id" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Group_Id" Type="Int32" Nullable="false" />
+          <Property Name="Phone" Type="Int64" Nullable="false" />
+          <Property Name="WorkStartTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="WorkEndTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Department_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="accessLog" Relationship="Self.FK_accessLog_user" FromRole="user" ToRole="accessLog" />
+          <NavigationProperty Name="department" Relationship="Self.FK_user_department" FromRole="user" ToRole="department" />
+          <NavigationProperty Name="role" Relationship="Self.FK_user_role" FromRole="user" ToRole="role" />
+          <NavigationProperty Name="userGroup" Relationship="Self.FK_user_userGroup" FromRole="user" ToRole="userGroup" />
+        </EntityType>
+        <EntityType Name="userGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Role_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="role" Relationship="Self.FK_userGroup_role" FromRole="userGroup" ToRole="role" />
+          <NavigationProperty Name="user" Relationship="Self.FK_user_userGroup" FromRole="userGroup" ToRole="user" />
+          <NavigationProperty Name="userGroup_accessPoint" Relationship="Self.FK_userGroup_accessPoint_userGroup" FromRole="userGroup" ToRole="userGroup_accessPoint" />
+        </EntityType>
+        <EntityType Name="userGroup_accessPoint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccessPoint_Id" Type="Int32" Nullable="false" />
+          <Property Name="Group_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="accessPoint" Relationship="Self.FK_userGroup_accessPoint_accessPoint" FromRole="userGroup_accessPoint" ToRole="accessPoint" />
+          <NavigationProperty Name="userGroup" Relationship="Self.FK_userGroup_accessPoint_userGroup" FromRole="userGroup_accessPoint" ToRole="userGroup" />
+        </EntityType>
+        <Association Name="FK_accessLog_accessPoint">
+          <End Role="accessPoint" Type="Self.accessPoint" Multiplicity="1" />
+          <End Role="accessLog" Type="Self.accessLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accessPoint">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="accessLog">
+              <PropertyRef Name="AccessPoint_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_accessLog_role">
+          <End Role="role" Type="Self.role" Multiplicity="1" />
+          <End Role="accessLog" Type="Self.accessLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="accessLog">
+              <PropertyRef Name="Role_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_accessLog_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="accessLog" Type="Self.accessLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="accessLog">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_department_accessPoint_accessPoint">
+          <End Role="accessPoint" Type="Self.accessPoint" Multiplicity="1" />
+          <End Role="department_accessPoint" Type="Self.department_accessPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accessPoint">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="department_accessPoint">
+              <PropertyRef Name="AccessPoint_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_role_accessPoint_accessPoint">
+          <End Role="accessPoint" Type="Self.accessPoint" Multiplicity="1" />
+          <End Role="role_accessPoint" Type="Self.role_accessPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accessPoint">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="role_accessPoint">
+              <PropertyRef Name="AccessPoint_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_userGroup_accessPoint_accessPoint">
+          <End Role="accessPoint" Type="Self.accessPoint" Multiplicity="1" />
+          <End Role="userGroup_accessPoint" Type="Self.userGroup_accessPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accessPoint">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="userGroup_accessPoint">
+              <PropertyRef Name="AccessPoint_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_department_accessPoint_department">
+          <End Role="department" Type="Self.department" Multiplicity="1" />
+          <End Role="department_accessPoint" Type="Self.department_accessPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="department_accessPoint">
+              <PropertyRef Name="Department_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_department">
+          <End Role="department" Type="Self.department" Multiplicity="1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="Department_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_role_accessPoint_role">
+          <End Role="role" Type="Self.role" Multiplicity="1" />
+          <End Role="role_accessPoint" Type="Self.role_accessPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="role_accessPoint">
+              <PropertyRef Name="Role_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_role">
+          <End Role="role" Type="Self.role" Multiplicity="1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="Role_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_userGroup_role">
+          <End Role="role" Type="Self.role" Multiplicity="1" />
+          <End Role="userGroup" Type="Self.userGroup" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="userGroup">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_userGroup">
+          <End Role="userGroup" Type="Self.userGroup" Multiplicity="1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="Group_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_userGroup_accessPoint_userGroup">
+          <End Role="userGroup" Type="Self.userGroup" Multiplicity="1" />
+          <End Role="userGroup_accessPoint" Type="Self.userGroup_accessPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="userGroup_accessPoint">
+              <PropertyRef Name="Group_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="accessControlManagementEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="accessLog" EntityType="Self.accessLog" />
+          <EntitySet Name="accessPoint" EntityType="Self.accessPoint" />
+          <EntitySet Name="department" EntityType="Self.department" />
+          <EntitySet Name="department_accessPoint" EntityType="Self.department_accessPoint" />
+          <EntitySet Name="role" EntityType="Self.role" />
+          <EntitySet Name="role_accessPoint" EntityType="Self.role_accessPoint" />
+          <EntitySet Name="user" EntityType="Self.user" />
+          <EntitySet Name="userGroup" EntityType="Self.userGroup" />
+          <EntitySet Name="userGroup_accessPoint" EntityType="Self.userGroup_accessPoint" />
+          <AssociationSet Name="FK_accessLog_accessPoint" Association="Self.FK_accessLog_accessPoint">
+            <End Role="accessPoint" EntitySet="accessPoint" />
+            <End Role="accessLog" EntitySet="accessLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_accessLog_role" Association="Self.FK_accessLog_role">
+            <End Role="role" EntitySet="role" />
+            <End Role="accessLog" EntitySet="accessLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_accessLog_user" Association="Self.FK_accessLog_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="accessLog" EntitySet="accessLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_department_accessPoint_accessPoint" Association="Self.FK_department_accessPoint_accessPoint">
+            <End Role="accessPoint" EntitySet="accessPoint" />
+            <End Role="department_accessPoint" EntitySet="department_accessPoint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_role_accessPoint_accessPoint" Association="Self.FK_role_accessPoint_accessPoint">
+            <End Role="accessPoint" EntitySet="accessPoint" />
+            <End Role="role_accessPoint" EntitySet="role_accessPoint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_userGroup_accessPoint_accessPoint" Association="Self.FK_userGroup_accessPoint_accessPoint">
+            <End Role="accessPoint" EntitySet="accessPoint" />
+            <End Role="userGroup_accessPoint" EntitySet="userGroup_accessPoint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_department_accessPoint_department" Association="Self.FK_department_accessPoint_department">
+            <End Role="department" EntitySet="department" />
+            <End Role="department_accessPoint" EntitySet="department_accessPoint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_department" Association="Self.FK_user_department">
+            <End Role="department" EntitySet="department" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
+          <AssociationSet Name="FK_role_accessPoint_role" Association="Self.FK_role_accessPoint_role">
+            <End Role="role" EntitySet="role" />
+            <End Role="role_accessPoint" EntitySet="role_accessPoint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_role" Association="Self.FK_user_role">
+            <End Role="role" EntitySet="role" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
+          <AssociationSet Name="FK_userGroup_role" Association="Self.FK_userGroup_role">
+            <End Role="role" EntitySet="role" />
+            <End Role="userGroup" EntitySet="userGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_userGroup" Association="Self.FK_user_userGroup">
+            <End Role="userGroup" EntitySet="userGroup" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
+          <AssociationSet Name="FK_userGroup_accessPoint_userGroup" Association="Self.FK_userGroup_accessPoint_userGroup">
+            <End Role="userGroup" EntitySet="userGroup" />
+            <End Role="userGroup_accessPoint" EntitySet="userGroup_accessPoint" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="accessControlManagementModelStoreContainer" CdmEntityContainer="accessControlManagementEntities">
+          <EntitySetMapping Name="accessLog">
+            <EntityTypeMapping TypeName="accessControlManagementModel.accessLog">
+              <MappingFragment StoreEntitySet="accessLog">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Action_Id" ColumnName="Action_Id" />
+                <ScalarProperty Name="Role_Id" ColumnName="Role_Id" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="AccessPoint_Id" ColumnName="AccessPoint_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="accessPoint">
+            <EntityTypeMapping TypeName="accessControlManagementModel.accessPoint">
+              <MappingFragment StoreEntitySet="accessPoint">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IPv4" ColumnName="IPv4" />
+                <ScalarProperty Name="IPv6" ColumnName="IPv6" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="IsOn" ColumnName="IsOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="department">
+            <EntityTypeMapping TypeName="accessControlManagementModel.department">
+              <MappingFragment StoreEntitySet="department">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="department_accessPoint">
+            <EntityTypeMapping TypeName="accessControlManagementModel.department_accessPoint">
+              <MappingFragment StoreEntitySet="department_accessPoint">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AccessPoint_Id" ColumnName="AccessPoint_Id" />
+                <ScalarProperty Name="Department_Id" ColumnName="Department_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="role">
+            <EntityTypeMapping TypeName="accessControlManagementModel.role">
+              <MappingFragment StoreEntitySet="role">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsManager" ColumnName="IsManager" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="role_accessPoint">
+            <EntityTypeMapping TypeName="accessControlManagementModel.role_accessPoint">
+              <MappingFragment StoreEntitySet="role_accessPoint">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Role_Id" ColumnName="Role_Id" />
+                <ScalarProperty Name="AccessPoint_Id" ColumnName="AccessPoint_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user">
+            <EntityTypeMapping TypeName="accessControlManagementModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Role_Id" ColumnName="Role_Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="WorkStartTime" ColumnName="WorkStartTime" />
+                <ScalarProperty Name="WorkEndTime" ColumnName="WorkEndTime" />
+                <ScalarProperty Name="Department_Id" ColumnName="Department_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userGroup">
+            <EntityTypeMapping TypeName="accessControlManagementModel.userGroup">
+              <MappingFragment StoreEntitySet="userGroup">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Role_Id" ColumnName="Role_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userGroup_accessPoint">
+            <EntityTypeMapping TypeName="accessControlManagementModel.userGroup_accessPoint">
+              <MappingFragment StoreEntitySet="userGroup_accessPoint">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AccessPoint_Id" ColumnName="AccessPoint_Id" />
+                <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

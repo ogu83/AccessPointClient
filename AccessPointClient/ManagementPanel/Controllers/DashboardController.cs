@@ -1,10 +1,6 @@
 ﻿using Common;
 using ManagementPanel.DB;
 using ManagementPanel.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ManagementPanel.Controllers
@@ -23,11 +19,6 @@ namespace ManagementPanel.Controllers
             return View(model);
         }
 
-        /// <summary>
-        /// Dashboard with Login
-        /// </summary>
-        /// <param name="collection"></param>
-        /// <returns></returns>
         [HttpPost]
         public ActionResult Index(FormCollection collection)
         {
@@ -46,6 +37,22 @@ namespace ManagementPanel.Controllers
         {
             Session["User"] = null;
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult SyncLDAP()
+        {
+            var user = Session["User"] as DB.user;
+            if (user == null)
+                return RedirectToAction("Index", "Home");
+
+            var users = LDAPHelper.GetADUsers();
+            foreach (var u in users)
+            {
+                var dbUser = new user { FullName = u.DisplayName, Username = u.UserName, Email = u.Email };
+                Operations.AddUser(dbUser);
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

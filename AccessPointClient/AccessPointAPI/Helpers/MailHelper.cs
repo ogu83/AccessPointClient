@@ -8,9 +8,17 @@ namespace AccessPointAPI.Helpers
     {
         public static void SendUnauthorizedAccessMail(user manager, user user, accessPoint accessPoint)
         {
-            var body = string.Format("UnauthorizedAccess by User: {0}-{1}, AccessPoint {2}-{3}, Time : {4}",
+            try
+            {
+                var body = string.Format("UnauthorizedAccess by User: {0}-{1}, AccessPoint {2}-{3}, Time : {4}",
                 user.Id, user.FullName, accessPoint.Id, accessPoint.Name, DateTime.Now);
-            Send("system@accessPointController.com", manager.Email, "Unauthorized Access", body);
+                Send("system@accessPointController.com", manager.Email, "Unauthorized Access", body);
+            }
+            catch (Exception)
+            {
+                
+            }
+            
         }
     }
 }

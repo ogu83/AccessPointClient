@@ -214,5 +214,12 @@ namespace ManagementPanel.DB
                 Message = "Employee is " + (inMyDepartment ? "allowed" : "denied")
             };
         }
+
+        public static OperationResult<user> AddUser(user user)
+        {
+            Entities.user.Add(user);
+            Entities.SaveChanges();
+            return new OperationResult<user> { Success = true, ReturnValue = user, };
+        }
     }
 }
