@@ -15,6 +15,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccessPointAPI", "AccessPoi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{DA2BBCD8-BB8D-4C90-AFED-5D4D32CDF579}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{2AA0A1E7-D049-430E-A7FD-9FD3D5A03930}"
+	ProjectSection(SolutionItems) = preProject
+		Access Control System Software Architecture.docx = Access Control System Software Architecture.docx
+		Access Control System Software Architecture.pptx = Access Control System Software Architecture.pptx
+		OguzKoroglu_Chief_Software_Architect_NET\Database\accessControlManagement.sql = OguzKoroglu_Chief_Software_Architect_NET\Database\accessControlManagement.sql
+		OguzKoroglu_Chief_Software_Architect_NET\Readme.doc = OguzKoroglu_Chief_Software_Architect_NET\Readme.doc
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
